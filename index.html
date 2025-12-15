@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Spoonly — Provider Opportunities</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@700&family=Lexend+Exa:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #EAE5DC;
+      --dark: #365557;
+      --light: #95B2AD;
+      --text-dark: #365557;
+      --text-light: #EAE5DC;
+      --muted: #d6e1df;
+      --purple: #5A3F5C;
+
+      --border: rgba(54,85,87,.28);
+      --borderLight: rgba(234,229,220,.35);
+      --shadow: 0 18px 40px rgba(0,0,0,.14);
+
+      --font-body: "Lexend Exa", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --font-heading: "Crimson Pro", Georgia, serif;
+
+      --radius: 8px;
+      --max: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-dark);
+      line-height:1.55;
+    }
+
+    h1{
+      font-family: var(--font-heading);
+      font-weight:700;
+      font-size:46px;
+      line-height:1.08;
+      margin:10px 0 12px;
+    }
+
+    a{ text-decoration:none; color:inherit; }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px 18px 80px;
+    }
+
+    /* NAV */
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding-bottom:24px;
+    }
+
+    .brand img{
+      height:48px;
+      width:auto;
+      display:block;
+    }
+
+    .navlinks{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+
+    .navlinks a{
+      font-weight:600;
+      letter-spacing:.04em;
+      opacity:.92;
+    }
+    .navlinks a:hover{ opacity:1; }
+
+    .pill{
+      padding:10px 16px;
+      border:2px solid var(--dark);
+      font-weight:700;
+      border-radius:var(--radius);
+      transition: transform .12s ease, opacity .12s ease, background-color .12s ease;
+    }
+
+    .pill.primary{
+      background:var(--purple);
+      color:#fff;
+      border-color:var(--purple);
+    }
+    .pill.primary:hover{
+      opacity:.95;
+      transform: translateY(-1px);
+    }
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:24px;
+    }
+
+    @media (max-width:900px){
+      .hero{ grid-template-columns:1fr; }
+    }
+
+    .box{
+      background:var(--dark);
+      color:var(--text-light);
+      padding:28px;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      border: 1px solid var(--borderLight);
+    }
+
+    .lead{
+      color:var(--muted);
+      max-width:60ch;
+      margin:12px 0 18px;
+    }
+
+    .note{
+      background:var(--light);
+      color:var(--dark);
+      padding:14px 16px;
+      border-radius:var(--radius);
+      font-weight:600;
+      letter-spacing:.02em;
+      border: 1px solid rgba(54,85,87,.22);
+    }
+
+    .sideStack{
+      display:grid;
+      gap:14px;
+    }
+
+    .sideStack h3{
+      text-transform:uppercase;
+      font-size:13px;
+      letter-spacing:.08em;
+      color:var(--muted);
+      margin:0 0 6px;
+      font-family:var(--font-body);
+      font-weight:700;
+    }
+
+    /* ROLES SECTION */
+    .section{
+      margin-top: 34px;
+    }
+
+    .sectionTitle{
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 24px;
+      margin: 0 0 14px;
+      color: var(--dark);
+    }
+
+    .roles{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .roleRow{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 18px;
+      background: rgba(149,178,173,.22);
+      border: 2px solid rgba(54,85,87,.32);
+      border-radius: var(--radius);
+    }
+
+    @media (max-width: 700px){
+      .roleRow{
+        flex-direction:column;
+        align-items:stretch;
+      }
+    }
+
+    .roleTitle{
+      font-weight: 800;
+      letter-spacing: .01em;
+      color: var(--dark);
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .roleMeta{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color: rgba(54,85,87,.85);
+      font-weight: 600;
+      flex-wrap:wrap;
+    }
+
+    .ratePill{
+      display:inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(234,229,220,.55);
+      border: 1px solid rgba(54,85,87,.28);
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    /* hide hashtags from applicants */
+    .tagPill{ display:none; }
+
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      font-weight:800;
+      border:2px solid var(--dark);
+      background:var(--light);
+      color:var(--dark);
+      border-radius:var(--radius);
+      transition: transform .12s ease, opacity .12s ease;
+      cursor:pointer;
+    }
+    .btn:hover{
+      opacity:.95;
+      transform: translateY(-1px);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color: var(--dark);
+      border-color: rgba(54,85,87,.25);
+    }
+
+    .btn.apply{
+      background: var(--dark);
+      color: var(--text-light);
+      border-color: rgba(234,229,220,.35);
+      white-space: nowrap;
+    }
+
+ /* ACCORDION (on-brand toggle) */
+.accordionToggle{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  padding:8px 12px;
+  border-radius: 999px;
+  border: 2px solid rgba(54,85,87,.28);
+  background: rgba(234,229,220,.55);
+
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .02em;
+  color: var(--dark);
+
+  cursor:pointer;
+  user-select:none;
+  transition: transform .12s ease, opacity .12s ease, background-color .12s ease;
+}
+
+.accordionToggle:hover{
+  opacity:.95;
+  transform: translateY(-1px);
+  background: rgba(149,178,173,.18);
+}
+
+.accordionToggle:focus-visible{
+  outline: 3px solid rgba(90,63,92,.35);
+  outline-offset: 2px;
+}
+
+/* Chevron */
+.accordionToggle::after{
+  content:"▾";
+  display:inline-block;
+  line-height:1;
+  transform: translateY(-1px);
+  transition: transform .16s ease;
+  opacity:.85;
+}
+
+/* When open (aria-expanded="true") rotate chevron */
+.accordionToggle[aria-expanded="true"]::after{
+  transform: rotate(180deg);
+}
+
+/* Optional: make it wrap nicely on small screens */
+@media (max-width: 700px){
+  .accordionToggle{ align-self:flex-start; }
+}
+
+    /* FORM */
+    .formBox{
+      background: rgba(234,229,220,.55);
+      border: 2px solid rgba(54,85,87,.22);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .formGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 700px){
+      .formGrid{ grid-template-columns: 1fr; }
+    }
+
+    label{
+      display:block;
+      font-weight:700;
+      color: rgba(54,85,87,.92);
+      font-size: 13px;
+      letter-spacing: .02em;
+    }
+
+    input, textarea, select{
+      width:100%;
+      margin-top:6px;
+      padding: 12px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(54,85,87,.28);
+      background: rgba(255,255,255,.55);
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      outline: none;
+    }
+
+    textarea{ resize: vertical; }
+
+    /* nicer file input */
+    input[type="file"]{
+      padding:10px;
+      background: rgba(255,255,255,.55);
+      border-radius: 10px;
+      border: 1px solid rgba(54,85,87,.28);
+    }
+    input[type="file"]::file-selector-button{
+      margin-right: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 2px solid rgba(54,85,87,.32);
+      background: rgba(149,178,173,.35);
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-weight: 800;
+      cursor: pointer;
+    }
+    input[type="file"]::file-selector-button:hover{ opacity:.95; }
+
+    .help{
+      font-size:12px;
+      color: rgba(54,85,87,.80);
+      margin-top:6px;
+    }
+
+    .formActions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-top: 12px;
+      flex-wrap:wrap;
+    }
+
+    .status{
+      font-weight: 700;
+      color: rgba(54,85,87,.85);
+    }
+
+    .hidden{ display:none !important; }
+
+    .thankyou{
+      padding:18px;
+      border-radius: var(--radius);
+      border: 2px solid rgba(54,85,87,.22);
+      background: rgba(149,178,173,.12);
+    }
+
+    footer{
+      margin-top:64px;
+      text-align:center;
+      font-weight:700;
+      color:#6b7f7d;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="brand">
+        <img src="logo-spoonly.svg" alt="Spoonly">
+      </div>
+      <nav class="navlinks">
+        <a href="#">Services</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+        <a class="pill primary" href="#">Join waitlist</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="box">
+        <h1>Work with Spoonly</h1>
+
+        <p class="lead">Collaborate with a care network centered on people living with chronic illness.</p>
+
+        <p class="lead">
+          Spoonly partners with licensed therapists, health coaches, nutrition practitioners,
+          and somatic providers to deliver compassionate, accessible virtual care for people
+          navigating chronic illnesses and their caregivers.
+        </p>
+
+        <p class="lead">
+          These are independent, contract-based opportunities designed to support flexibility,
+          autonomy, and thoughtful care delivery.
+        </p>
+
+        <div class="note">
+          Please write in your own voice. We’re not looking for a polished cover letter, just a genuine reflection of who you are and why this work speaks to you. (No offense to our robot friends 🤖.)
+        </div>
+      </div>
+
+      <div class="sideStack">
+        <div class="box">
+          <h3>Autonomy with support</h3>
+          <p><strong>You bring your expertise. We handle the infrastructure.</strong></p>
+        </div>
+        <div class="box">
+          <h3>Who this is for</h3>
+          <p><strong>Providers who value flexibility, clarity, and alignment.</strong></p>
+        </div>
+        <div class="box">
+          <h3>Care delivery</h3>
+          <p><strong>Virtual, integrative, and designed for real-world energy.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLES LIST -->
+    <section class="section">
+      <h2 class="sectionTitle">Open positions</h2>
+
+      <div class="roles">
+
+        <!-- THERAPY -->
+        <div class="roleRow" id="role-therapy">
+          <div style="flex:1;">
+            <div class="roleTitle">Licensed Therapist (Remote, Chronic Illness-Focused)</div>
+
+            <div class="roleMeta">
+              <span class="ratePill">$90/hour</span>
+              <button type="button" class="accordionToggle" aria-expanded="false" data-acc="health">
+                View role details
+              </button>
+            </div>
+
+            <div class="accordionContent hidden" data-acc-content="therapy">
+              <div class="accordionInner">
+                <h4>The Role</h4>
+                <p>Placeholder copy. Replace with Therapy JD.</p>
+
+                <h4>Requirements</h4>
+                <ul>
+                  <li>Placeholder requirement</li>
+                  <li>Placeholder requirement</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <a class="btn apply" href="#apply" data-role="therapy">Apply now</a>
+        </div>
+
+        <!-- HEALTH -->
+        <div class="roleRow" id="role-health">
+          <div style="flex:1;">
+            <div class="roleTitle">Health Coach</div>
+
+            <div class="roleMeta">
+              <span class="ratePill">$68/hour</span>
+              <button type="button" class="accordionToggle" aria-expanded="false" data-acc="health">
+                View role details
+              </button>
+            </div>
+
+            <div class="accordionContent hidden" data-acc-content="health">
+              <div class="accordionInner">
+                <h4>The Role</h4>
+                <p>Placeholder copy. Replace with Health Coach JD.</p>
+
+                <h4>Requirements</h4>
+                <ul>
+                  <li>Placeholder requirement</li>
+                  <li>Placeholder requirement</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <a class="btn apply" href="#apply" data-role="health">Apply now</a>
+        </div>
+
+        <!-- NUTRITION -->
+        <div class="roleRow" id="role-nutrition">
+          <div style="flex:1;">
+            <div class="roleTitle">Functional Nutritionist</div>
+
+            <div class="roleMeta">
+              <span class="ratePill">$68/hour</span>
+              <button type="button" class="accordionToggle" aria-expanded="false" data-acc="nutrition">
+                View role details
+              </button>
+            </div>
+
+            <div class="accordionContent hidden" data-acc-content="nutrition">
+              <div class="accordionInner">
+                <h4>The Role</h4>
+                <p>Placeholder copy. Replace with Functional Nutritionist JD.</p>
+
+                <h4>Requirements</h4>
+                <ul>
+                  <li>Placeholder requirement</li>
+                  <li>Placeholder requirement</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <a class="btn apply" href="#apply" data-role="nutrition">Apply now</a>
+        </div>
+
+        <!-- SOMATIC -->
+        <div class="roleRow" id="role-somatic">
+          <div style="flex:1;">
+            <div class="roleTitle">Somatic Coach or Body-Based Practitioner</div>
+
+            <div class="roleMeta">
+              <span class="ratePill">$68/hour</span>
+              <button type="button" class="accordionToggle" aria-expanded="false" data-acc="somatic">
+                View role details
+              </button>
+            </div>
+
+            <div class="accordionContent hidden" data-acc-content="somatic">
+              <div class="accordionInner">
+                <h4>The Role</h4>
+                <p>Placeholder copy. Replace with Somatic Coach JD.</p>
+
+                <h4>Requirements</h4>
+                <ul>
+                  <li>Placeholder requirement</li>
+                  <li>Placeholder requirement</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <a class="btn apply" href="#apply" data-role="somatic">Apply now</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUICK INTEREST FORM -->
+    <section id="apply" class="section">
+      <h2 class="sectionTitle">Application Form</h2>
+
+      <div class="formBox">
+        <p class="status" id="selectedRoleText">Role: Therapy</p>
+
+        <!-- thank you screen -->
+        <div id="thankYou" class="thankyou hidden">
+          <div style="font-weight:900; font-size:18px; margin-bottom:6px;">Thanks — we got it.</div>
+          <div class="status" id="thankYouRole">We received your application.</div>
+          <div class="help" style="margin-top:8px;">
+            If it’s a fit, we’ll follow up by email. We aim to respond as quickly as we can.
+          </div>
+          <div class="formActions" style="margin-top:14px;">
+            <button class="btn" type="button" id="submitAnother">Submit another application</button>
+          </div>
+        </div>
+
+        <form id="interestForm" novalidate>
+          <input type="hidden" name="role" id="roleField" value="therapy" />
+
+          <div class="formGrid">
+            <div>
+              <label for="roleSelect">Role *</label>
+              <select id="roleSelect" name="roleSelect" required>
+                <option value="therapy">Therapist</option>
+                <option value="health">Health Coach</option>
+                <option value="nutrition">Functional Nutritionist</option>
+                <option value="somatic">Somatic Coach</option>
+              </select>
+              <div class="help">You can change this if you clicked the wrong role above.</div>
+            </div>
+
+            <div>
+              <label for="name">Full name *</label>
+              <input id="name" name="name" autocomplete="name" required />
+            </div>
+
+            <div>
+              <label for="email">Email *</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+
+            <div>
+              <label for="phone">Phone (optional)</label>
+              <input id="phone" name="phone" autocomplete="tel" />
+            </div>
+
+            <div>
+              <label for="location">Where are you based? (City + State) *</label>
+              <input id="location" name="location" placeholder="e.g., Portland, OR" required />
+            </div>
+
+            <!-- THERAPY ONLY -->
+            <div id="therapyStatesWrap" class="hidden">
+              <label for="statesLicensed">State(s) you’re licensed in (comma-separated) *</label>
+              <input id="statesLicensed" name="states_licensed" placeholder="e.g., GA, CT" />
+              <div class="help">List every state you can provide therapy in.</div>
+            </div>
+
+            <div style="grid-column: 1 / -1;">
+              <label for="resume">Resume/CV (PDF or DOC/DOCX) *</label>
+              <input
+                id="resume"
+                name="resume"
+                type="file"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                required
+              />
+              <div class="help">Max 8MB.</div>
+            </div>
+
+            <div style="grid-column: 1 / -1;">
+              <label for="link">Website / LinkedIn (optional)</label>
+              <input id="link" name="link" placeholder="https://..." />
+            </div>
+
+            <div style="grid-column: 1 / -1;">
+              <label for="note">Please tell us why you are interested in working with Spoonly:</label>
+              <textarea id="note" name="note" rows="4" placeholder="Anything you'd like us to know..."></textarea>
+            </div>
+          </div>
+
+          <div class="formActions">
+            <button class="btn" type="submit" id="submitBtn">Send</button>
+            <span class="status" id="formStatus" aria-live="polite"></span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Spoonly — Careers mock
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const ROLE_LABELS = {
+      therapy: "Therapy",
+      health: "Health Coach",
+      nutrition: "Functional Nutritionist",
+      somatic: "Somatic Coach"
+    };
+
+    const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/ij55nlgjgiu53pheugp0sg1uzwkj1cns";
+
+    const form = document.getElementById("interestForm");
+    const formStatus = document.getElementById("formStatus");
+    const submitBtn = document.getElementById("submitBtn");
+
+    const roleField = document.getElementById("roleField");
+    const roleSelect = document.getElementById("roleSelect");
+    const selectedRoleText = document.getElementById("selectedRoleText");
+
+    const therapyWrap = document.getElementById("therapyStatesWrap");
+    const statesLicensed = document.getElementById("statesLicensed");
+
+    const thankYou = document.getElementById("thankYou");
+    const thankYouRole = document.getElementById("thankYouRole");
+    const submitAnother = document.getElementById("submitAnother");
+
+    function show(el){ el.classList.remove("hidden"); }
+    function hide(el){ el.classList.add("hidden"); }
+
+    function resetConditionalRequirements(){
+      statesLicensed.required = false;
+      hide(therapyWrap);
+    }
+
+    function applyRoleRules(role){
+      resetConditionalRequirements();
+      if (role === "therapy") {
+        show(therapyWrap);
+        statesLicensed.required = true;
+      }
+    }
+
+    function setRole(role){
+      const safeRole = ROLE_LABELS[role] ? role : "therapy";
+      roleField.value = safeRole;
+      roleSelect.value = safeRole;
+      selectedRoleText.textContent = "Role: " + ROLE_LABELS[safeRole];
+      applyRoleRules(safeRole);
+    }
+
+    // Apply now buttons
+    document.querySelectorAll('[data-role]').forEach(btn => {
+      btn.addEventListener('click', () => setRole(btn.dataset.role));
+    });
+
+    // Dropdown change
+    roleSelect.addEventListener("change", (e) => setRole(e.target.value));
+
+    // Default role
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("role")) setRole(urlParams.get("role"));
+    else setRole("therapy");
+
+    // Accordion logic (only one open at a time)
+    const allAccContents = () => document.querySelectorAll(".accordionContent");
+    const allAccToggles = () => document.querySelectorAll(".accordionToggle");
+
+    allAccToggles().forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.getAttribute("data-acc");
+        const content = document.querySelector(`.accordionContent[data-acc-content="${key}"]`);
+        if (!content) return;
+
+        const isOpen = !content.classList.contains("hidden");
+
+        // close all
+        allAccContents().forEach(c => c.classList.add("hidden"));
+        allAccToggles().forEach(b => b.setAttribute("aria-expanded", "false"));
+
+        // open this one if it was closed
+        if (!isOpen) {
+          content.classList.remove("hidden");
+          btn.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+
+    function validateBeforeSend(){
+      if (!form.checkValidity()) {
+        formStatus.textContent = "Please complete the required fields.";
+        form.reportValidity();
+        return false;
+      }
+
+      const resumeInput = document.getElementById("resume");
+      const file = resumeInput?.files?.[0];
+      if (!file) {
+        formStatus.textContent = "Please upload your resume/CV.";
+        return false;
+      }
+
+      const MAX_MB = 8;
+      if (file.size > MAX_MB * 1024 * 1024) {
+        formStatus.textContent = `Resume is too large (max ${MAX_MB}MB).`;
+        return false;
+      }
+
+      const allowed = [
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      ];
+      if (!allowed.includes(file.type) && !/\.(pdf|doc|docx)$/i.test(file.name)) {
+        formStatus.textContent = "Please upload a PDF or Word document (DOC/DOCX).";
+        return false;
+      }
+
+      return true;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      formStatus.textContent = "";
+
+      if (!validateBeforeSend()) return;
+
+      formStatus.textContent = "Sending…";
+      submitBtn.disabled = true;
+
+      try {
+        const fd = new FormData(form);
+        fd.set("role", roleField.value);
+
+        const res = await fetch(MAKE_WEBHOOK_URL, { method: "POST", body: fd });
+        if (!res.ok) throw new Error("Webhook error");
+
+        const roleLabel = ROLE_LABELS[roleField.value] || "your role";
+        thankYouRole.textContent = `We received your application for ${roleLabel}.`;
+
+        hide(form);
+        show(thankYou);
+        formStatus.textContent = "";
+
+      } catch (err) {
+        formStatus.textContent = "Hmm — didn’t send. Please try again, or email us.";
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    submitAnother.addEventListener("click", () => {
+      const roleToKeep = roleField.value;
+      form.reset();
+      setRole(roleToKeep);
+
+      hide(thankYou);
+      show(form);
+      formStatus.textContent = "";
+      document.getElementById("name").focus();
+    });
+  </script>
+</body>
+</html>
